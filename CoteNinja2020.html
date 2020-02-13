@@ -1,0 +1,94 @@
+<html>
+<body>
+	<div id='background'>
+        <div id='character' style='position:absolute; top:100px; left:450px; background-image: url("img/down1.png"); width:59px; height:86px;'></div>
+    </div>
+    <script type="text/javascript">
+	    var leftValue = 450, topValue = 100;
+		var character;
+
+    	function update(){
+    		document.getElementById("character").style.left = leftValue+"px";
+    		document.getElementById("character").style.top = topValue+"px";
+
+    	}
+
+    	 document.onkeydown = function(e){
+    		console.log(e);
+			character = document.getElementById("character");
+    		if(e.keyCode == 37) { // LEFT
+    			character.style.backgroundImage = "url('img/left1.png')";
+				leftValue = leftValue - 10;
+				if(leftValue < 0) {  // **BARRIER**
+					leftValue = 0;
+				}
+				
+			}
+            
+    		else if (e.keyCode == 39) { // RIGHT
+				character.style.backgroundImage = "url('img/right1.png')";
+    			leftValue = leftValue + 10; 
+				if(leftValue > 500) {
+					leftValue = 500;
+				}  
+    		}
+    		else if (e.keyCode == 40) { // DOWN
+				character.style.backgroundImage = "url('img/down1.png')";
+				topValue = topValue + 10;
+				if(topValue > 500) {
+					topValue = 500;
+				}
+    		}
+    		else if (e.keyCode == 38) { // UP
+				character.style.backgroundImage = "url('img/top1.png')";
+			    topValue = topValue - 10;
+				if(topValue < 0) {
+					topValue = 0;
+				}
+			}	
+            else if (e.keyCode == 74) { // JUMP
+			    topValue = topValue + 250;
+			}
+    		update();
+
+		 }
+    	
+
+		document.onkeyup = function(e){
+    		console.log(e);
+			character = document.getElementById("character");
+			video = document.getElementById("video");
+    		if(e.keyCode == 37) { // LEFT
+    			character.style.backgroundImage = "url('img/left2.png')";
+				leftValue = leftValue - 10;
+    		}
+    		else if (e.keyCode == 39) { // RIGHT
+				character.style.backgroundImage = "url('img/right2.png')";
+    			leftValue = leftValue + 10;    		
+    		}
+    		else if (e.keyCode == 40) { // DOWN
+				character.style.backgroundImage = "url('img/down2.png')";
+				topValue = topValue + 10;
+    		}
+    		else if (e.keyCode == 38) { // UP
+				character.style.backgroundImage = "url('img/top2.png')";
+			    topValue = topValue - 10;
+			}	
+            else if (e.keyCode == 74) { // JUMP
+			    topValue = topValue + 250;
+			}
+			else if(e.keyCode == 82) { // RESET
+			    topValue = 100;
+				leftValue = 450;
+				character.style.backgroundImage = "url('img/death1.png')" ;
+				
+				video.play();
+				
+			}
+    		update();
+
+		}
+	</script>
+	<video id="video" video width="320" height="240" src="C:\Users\micha\Downloads\academy-ninja-master\academy-ninja-master\img\death2.mp4" type="video/mp4"></video>
+</body>
+</html>
